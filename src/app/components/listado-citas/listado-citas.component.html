@@ -1,13 +1,36 @@
 <section class="listado">
   <header class="listado__header">
     <h2 class="listado__titulo">Listado de citas</h2>
+
+    <div class="listado__filtros">
+      <label for="filtro-estado" class="listado__filtro-label">
+        Filtrar por estado:
+      </label>
+      <select
+        id="filtro-estado"
+        class="listado__filtro-select"
+        [value]="filtro"
+        (change)="cambiarFiltro($event)"
+      >
+        <option *ngFor="let opcion of OPCIONES_FILTRO" [value]="opcion">
+          {{ opcion }}
+        </option>
+      </select>
+    </div>
   </header>
 
   <p *ngIf="citas.length === 0" class="listado__vacio">
     No hay citas registradas
   </p>
 
-  <div *ngIf="citas.length > 0" class="listado__tabla-wrapper">
+  <p *ngIf="citas.length > 0 && indicesFiltrados.length === 0" class="listado__vacio">
+    No hay citas con el estado "{{ filtro }}"
+  </p>
+
+  <div
+    *ngIf="citas.length > 0 && indicesFiltrados.length > 0"
+    class="listado__tabla-wrapper"
+  >
     <table class="tabla">
       <thead class="tabla__thead">
         <tr class="tabla__fila">
@@ -21,22 +44,24 @@
         </tr>
       </thead>
       <tbody class="tabla__tbody">
-        <ng-container *ngFor="let cita of citas; let indice = index">
+        <ng-container *ngFor="let indice of indicesFiltrados">
           <tr class="tabla__fila">
             <td class="tabla__dato">
-              <span class="tabla__paciente">{{ cita.nombrePaciente }}</span>
-              <span class="tabla__dpi">{{ cita.dpi }}</span>
+              <span class="tabla__paciente">
+                {{ citaEn(indice).nombrePaciente }}
+              </span>
+              <span class="tabla__dpi">{{ citaEn(indice).dpi }}</span>
             </td>
-            <td class="tabla__dato">{{ cita.especialidad }}</td>
-            <td class="tabla__dato">{{ cita.medico }}</td>
-            <td class="tabla__dato">{{ cita.fecha }}</td>
-            <td class="tabla__dato">{{ cita.hora }}</td>
+            <td class="tabla__dato">{{ citaEn(indice).especialidad }}</td>
+            <td class="tabla__dato">{{ citaEn(indice).medico }}</td>
+            <td class="tabla__dato">{{ citaEn(indice).fecha }}</td>
+            <td class="tabla__dato">{{ citaEn(indice).hora }}</td>
             <td class="tabla__dato">
               <span
                 class="estado"
-                [ngClass]="'estado--' + estadoCss(cita.estado)"
+                [ngClass]="'estado--' + estadoCss(citaEn(indice).estado)"
               >
-                {{ cita.estado }}
+                {{ citaEn(indice).estado }}
               </span>
             </td>
             <td class="tabla__dato tabla__acciones">

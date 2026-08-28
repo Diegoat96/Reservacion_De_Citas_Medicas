@@ -4,6 +4,10 @@ import { Cita, EstadoCita } from '../../models/cita';
 import { CitasService } from '../../services/citas.service';
 
 const OPCIONES_ESTADO: EstadoCita[] = ['Programada', 'Atendida', 'Cancelada'];
+const OPCIONES_FILTRO: ('Todas' | EstadoCita)[] = [
+  'Todas',
+  ...OPCIONES_ESTADO,
+];
 const OPCIONES_SI_NO: boolean[] = [true, false];
 
 @Component({
@@ -14,9 +18,11 @@ const OPCIONES_SI_NO: boolean[] = [true, false];
 })
 export class ListadoCitasComponent implements OnInit {
   protected citas: Cita[] = [];
+  protected filtro: 'Todas' | EstadoCita = 'Todas';
   protected indiceEdicion: number | null = null;
   protected formularioEdicion!: FormGroup;
   protected readonly OPCIONES_ESTADO = OPCIONES_ESTADO;
+  protected readonly OPCIONES_FILTRO = OPCIONES_FILTRO;
   protected readonly OPCIONES_SI_NO = OPCIONES_SI_NO;
 
   constructor(
@@ -29,8 +35,27 @@ export class ListadoCitasComponent implements OnInit {
     this.inicializarFormulario();
   }
 
+  protected get indicesFiltrados(): number[] {
+    return this.citas
+      .map((cita, indice) => ({ cita, indice }))
+      .filter(({ cita }) => this.filtro === 'Todas' || cita.estado === this.filtro)
+      .map(({ indice }) => indice);
+  }
+
+  protected citaEn(indice: number): Cita {
+    return this.citas[indice];
+  }
+
   protected estadoCss(estado: EstadoCita): string {
     return estado.toLowerCase();
+  }
+
+  protected cambiarFiltro(evento: Event): void {
+    const seleccion = (evento.target as HTMLSelectElement).value;
+    if (this.esOpcionDeFiltro(seleccion)) {
+      this.filtro = seleccion;
+      this.cancelarEdicion();
+    }
   }
 
   protected iniciarEdicion(indice: number): void {
@@ -95,8 +120,8 @@ export class ListadoCitasComponent implements OnInit {
     this.actualizarCitas();
   }
 
-  private citaEn(indice: number): Cita {
-    return this.citas[indice];
+  private esOpcionDeFiltro(valor: string): valor is 'Todas' | EstadoCita {
+    return OPCIONES_FILTRO.includes(valor as 'Todas' | EstadoCita);
   }
 
   private actualizarCitas(): void {
