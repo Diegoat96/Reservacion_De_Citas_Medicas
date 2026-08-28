@@ -1,217 +1,56 @@
-.listado {
-  padding: 1.5rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #2c3e50;
-}
-
-.listado__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.listado__titulo {
-  margin: 0;
-  font-size: 1.5rem;
-  color: #1f618d;
-}
-
-.listado__filtros {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.listado__filtro-label {
-  font-weight: 600;
-}
-
-.listado__filtro-select {
-  padding: 0.4rem 0.6rem;
-  border: 1px solid #bdc3c7;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  background-color: #fff;
-  cursor: pointer;
-}
-
-.listado__vacio {
-  padding: 2rem;
-  text-align: center;
-  color: #95a5a6;
-  background-color: #ecf0f1;
-  border-radius: 6px;
-  font-size: 1.1rem;
-}
-
-.listado__tabla-wrapper {
+.table-responsive {
   overflow-x: auto;
 }
 
-.tabla {
+.table-citas {
   width: 100%;
   border-collapse: collapse;
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.tabla__thead {
-  background-color: #1f618d;
-  color: #fff;
-}
-
-.tabla__encabezado {
-  padding: 0.75rem 1rem;
+  margin-top: 16px;
   text-align: left;
-  font-weight: 600;
-  white-space: nowrap;
 }
 
-.tabla__fila:nth-child(even) {
-  background-color: #f8f9fa;
+.table-citas th, 
+.table-citas td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.tabla__dato {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e6e8ea;
-  vertical-align: middle;
-}
-
-.tabla__paciente {
-  display: block;
+.table-citas th {
+  background-color: #f8fafc;
+  color: #475569;
   font-weight: 600;
 }
 
-.tabla__dpi {
-  display: block;
-  font-size: 0.8rem;
-  color: #95a5a6;
+.table-citas tr:hover {
+  background-color: #f8fafc;
 }
 
-.tabla__acciones {
-  white-space: nowrap;
-}
-
-.estado {
-  display: inline-block;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.estado--programada {
-  background-color: #ebf5fb;
-  color: #1f618d;
-}
-
-.estado--atendida {
-  background-color: #d5f5e3;
-  color: #1e8449;
-}
-
-.estado--cancelada {
-  background-color: #fadbd8;
-  color: #c0392b;
-}
-
-.btn {
-  padding: 0.4rem 0.9rem;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-}
-
-.btn + .btn {
-  margin-left: 0.5rem;
-}
-
-.btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.btn--editar {
-  background-color: #f39c12;
-  color: #fff;
-}
-
-.btn--editar:hover:not(:disabled) {
-  background-color: #e67e22;
-}
-
-.btn--eliminar {
-  background-color: #e74c3c;
-  color: #fff;
-}
-
-.btn--eliminar:hover:not(:disabled) {
-  background-color: #c0392b;
-}
-
-.btn--aceptar {
-  background-color: #27ae60;
-  color: #fff;
-}
-
-.btn--aceptar:hover:not(:disabled) {
-  background-color: #1e8449;
-}
-
-.btn--secundario {
-  background-color: #bdc3c7;
-  color: #2c3e50;
-}
-
-.btn--secundario:hover:not(:disabled) {
-  background-color: #95a5a6;
-}
-
-.edicion {
-  background-color: #fdf2e9;
-}
-
-.edicion__form {
-  padding: 0.5rem;
-}
-
-.edicion__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.campo {
+.filter-container {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
-.campo__label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #566573;
+.actions-cell {
+  display: flex;
+  gap: 8px;
 }
 
-.campo__input {
-  padding: 0.45rem 0.6rem;
-  border: 1px solid #bdc3c7;
+.btn-sm {
+  padding: 6px 10px;
   border-radius: 4px;
-  font-size: 0.9rem;
-  font-family: inherit;
+  border: none;
+  font-size: 0.8rem;
+  cursor: pointer;
 }
 
-.campo__input:focus {
-  outline: none;
-  border-color: #1f618d;
+.btn-edit {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.btn-delete {
+  background-color: var(--error-color);
+  color: white;
 }
