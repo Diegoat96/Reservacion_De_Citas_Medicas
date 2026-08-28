@@ -1,4 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { CitasService } from '../services/citas.service';
 
 // DPI: exactamente 13 dígitos, sin espacios ni guiones
 export function dpiValidator(): ValidatorFn {
@@ -26,5 +27,28 @@ export function fechaNoAnteriorValidator(): ValidatorFn {
     hoy.setHours(0, 0, 0, 0);
     const fechaSeleccionada = new Date(control.value);
     return fechaSeleccionada < hoy ? { fechaInvalida: true } : null;
+  };
+}
+
+
+//Citas:permitir editar una cita sin que choque consigo misma
+export function horarioChoqueValidator(
+  citasService: CitasService,
+  obtenerIndiceActual: () => number | null
+): ValidatorFn {
+  return (formGroup: AbstractControl): ValidationErrors | null => {
+    const medico = formGroup.get('medico')?.value;
+    const fecha = formGroup.get('fecha')?.value;
+    const hora = formGroup.get('hora')?.value;
+    if (!medico || !fecha || !hora) return null;
+    const indiceActual = obtenerIndiceActual();
+    const citas = citasService.obtenerCitas();
+    const hayChoque = citas.some((cita, indice) =>
+      indice !== indiceActual &&
+      cita.medico === medico &&
+      cita.fecha === fecha &&
+      cita.hora === hora
+    );
+    return hayChoque ? { horarioChoque: true } : null;
   };
 }
