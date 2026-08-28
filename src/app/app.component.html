@@ -1,5 +1,38 @@
-<nav>
-  <a routerLink="/">Listado de citas</a>
-  <a routerLink="/nueva-cita">Nueva cita</a>
+<nav class="app-nav">
+  <div class="app-nav__brand">
+    <svg class="app-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 2v4" />
+      <path d="M12 18v4" />
+      <path d="M4.93 4.93l2.83 2.83" />
+      <path d="M16.24 16.24l2.83 2.83" />
+      <path d="M2 12h4" />
+      <path d="M18 12h4" />
+      <path d="M4.93 19.07l2.83-2.83" />
+      <path d="M16.24 7.76l2.83-2.83" />
+    </svg>
+    <span class="app-nav__titulo">Citas Médicas</span>
+  </div>
+  <div class="app-nav__links">
+    <a routerLink="/" routerLinkActive="app-nav__link--activo" [routerLinkActiveOptions]="{ exact: true }" class="app-nav__link">
+      <svg class="app-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="8" y1="6" x2="21" y2="6" />
+        <line x1="8" y1="12" x2="21" y2="12" />
+        <line x1="8" y1="18" x2="21" y2="18" />
+        <line x1="3" y1="6" x2="3.01" y2="6" />
+        <line x1="3" y1="12" x2="3.01" y2="12" />
+        <line x1="3" y1="18" x2="3.01" y2="18" />
+      </svg>
+      <span>Listado de citas</span>
+    </a>
+    <a routerLink="/nueva-cita" routerLinkActive="app-nav__link--activo" class="app-nav__link">
+      <svg class="app-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 5v14" />
+        <path d="M5 12h14" />
+      </svg>
+      <span>Nueva cita</span>
+    </a>
+  </div>
 </nav>
-<router-outlet></router-outlet>
+<main class="app-contenido">
+  <router-outlet></router-outlet>
+</main>
