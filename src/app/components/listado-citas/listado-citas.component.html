@@ -1,1 +1,44 @@
-<p>listado-citas works!</p>
+<section class="listado">
+  <header class="listado__header">
+    <h2 class="listado__titulo">Listado de citas</h2>
+  </header>
+
+  <p *ngIf="citas.length === 0" class="listado__vacio">
+    No hay citas registradas
+  </p>
+
+  <div *ngIf="citas.length > 0" class="listado__tabla-wrapper">
+    <table class="tabla">
+      <thead class="tabla__thead">
+        <tr class="tabla__fila">
+          <th class="tabla__encabezado">Paciente</th>
+          <th class="tabla__encabezado">Especialidad</th>
+          <th class="tabla__encabezado">Médico</th>
+          <th class="tabla__encabezado">Fecha</th>
+          <th class="tabla__encabezado">Hora</th>
+          <th class="tabla__encabezado">Estado</th>
+        </tr>
+      </thead>
+      <tbody class="tabla__tbody">
+        <tr class="tabla__fila" *ngFor="let cita of citas">
+          <td class="tabla__dato">
+            <span class="tabla__paciente">{{ cita.nombrePaciente }}</span>
+            <span class="tabla__dpi">{{ cita.dpi }}</span>
+          </td>
+          <td class="tabla__dato">{{ cita.especialidad }}</td>
+          <td class="tabla__dato">{{ cita.medico }}</td>
+          <td class="tabla__dato">{{ cita.fecha }}</td>
+          <td class="tabla__dato">{{ cita.hora }}</td>
+          <td class="tabla__dato">
+            <span
+              class="estado"
+              [ngClass]="'estado--' + estadoCss(cita.estado)"
+            >
+              {{ cita.estado }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
