@@ -1,69 +1,62 @@
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
+.form-cita {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
 }
 
-.form-group {
+.campo {
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  margin-bottom: 12px;
 }
 
-.form-group label {
-  font-weight: 600;
-  margin-bottom: 6px;
-  font-size: 0.9rem;
+label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
 }
 
-.form-control {
-  padding: 10px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color 0.2s;
+input, select, textarea {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 
-.form-control:focus {
-  border-color: var(--primary);
+.checkbox {
+  flex-direction: row;
+  align-items: center;
 }
 
-.form-control.invalid {
-  border-color: var(--error-color);
+.error {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
 }
 
-.error-msg {
-  color: var(--error-color);
+.contador {
   font-size: 0.8rem;
-  margin-top: 4px;
-}
-
-.char-counter {
-  font-size: 0.75rem;
-  color: #64748b;
+  color: #777;
   text-align: right;
-  margin-top: 2px;
 }
 
-.btn-primary {
-  background-color: var(--primary);
+.contador.limite {
+  color: #d32f2f;
+}
+
+button {
+  padding: 0.7rem;
+  background-color: #1976d2;
   color: white;
   border: none;
-  padding: 12px 20px;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: 600;
-  width: 100%;
-  margin-top: 12px;
-  transition: background-color 0.2s;
+  font-size: 1rem;
 }
 
-.btn-primary:hover {
-  background-color: var(--primary-hover);
-}
-
-.btn-primary:disabled {
-  background-color: #94a3b8;
+button:disabled {
+  background-color: #aaa;
   cursor: not-allowed;
 }
