@@ -1,0 +1,261 @@
+.listado {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.listado__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.listado__resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.listado__tarjeta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 10px;
+  background-color: #fff;
+  border-left: 5px solid #94a3b8;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.listado__tarjeta--total {
+  border-left-color: #2563eb;
+}
+
+.listado__tarjeta--programada {
+  border-left-color: #1e40af;
+}
+
+.listado__tarjeta--atendida {
+  border-left-color: #16a34a;
+}
+
+.listado__tarjeta--cancelada {
+  border-left-color: #dc2626;
+}
+
+.listado__tarjeta-icono {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.listado__tarjeta--total .listado__tarjeta-icono {
+  color: #2563eb;
+}
+
+.listado__tarjeta--programada .listado__tarjeta-icono {
+  color: #1e40af;
+}
+
+.listado__tarjeta--atendida .listado__tarjeta-icono {
+  color: #16a34a;
+}
+
+.listado__tarjeta--cancelada .listado__tarjeta-icono {
+  color: #dc2626;
+}
+
+.listado__tarjeta-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.listado__tarjeta-numero {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #0f172a;
+}
+
+.listado__tarjeta-etiqueta {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.listado__titulo {
+  margin: 0;
+  color: #0f172a;
+}
+
+.listado__filtros {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.listado__filtro-label {
+  font-weight: 600;
+  color: #475569;
+}
+
+.listado__filtro-select {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #fff;
+}
+
+.listado__vacio {
+  color: #64748b;
+  font-size: 1rem;
+  text-align: center;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.listado__tabla-wrapper {
+  overflow-x: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tabla__fila {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabla__fila:last-of-type {
+  border-bottom: none;
+}
+
+.tabla__encabezado {
+  padding: 12px 16px;
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabla__dato {
+  padding: 12px 16px;
+}
+
+.tabla__fila:hover .tabla__dato {
+  background-color: #f8fafc;
+}
+
+.tabla__paciente {
+  display: block;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.tabla__dpi {
+  display: block;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.tabla__acciones {
+  white-space: nowrap;
+}
+
+.estado {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.estado--programada {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.estado--atendida {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.estado--cancelada {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.btn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn--editar {
+  background-color: #f59e0b;
+}
+
+.btn--eliminar {
+  background-color: #ef4444;
+}
+
+.btn--aceptar {
+  background-color: #22c55e;
+}
+
+.btn--secundario {
+  background-color: #94a3b8;
+}
+
+.btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.edicion {
+  background-color: #f8fafc;
+}
+
+.edicion__form {
+  padding: 16px;
+}
+
+.edicion__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo__label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #334155;
+}
+
+.campo__input {
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}

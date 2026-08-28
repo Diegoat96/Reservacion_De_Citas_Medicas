@@ -1,1 +1,114 @@
-<p>formulario-cita works!</p>
+<form [formGroup]="citaForm" (ngSubmit)="onSubmit()" class="form-cita">
+  <h2>Registrar Cita Médica</h2>
+
+  <!-- Nombre del paciente -->
+  <div class="campo">
+    <label for="nombrePaciente">Nombre del paciente</label>
+    <input id="nombrePaciente" type="text" formControlName="nombrePaciente">
+    <div class="error" *ngIf="f['nombrePaciente'].touched && f['nombrePaciente'].invalid">
+      <span *ngIf="f['nombrePaciente'].errors?.['required']">El nombre es obligatorio.</span>
+      <span *ngIf="f['nombrePaciente'].errors?.['minlength']">Debe tener al menos 5 caracteres.</span>
+    </div>
+  </div>
+
+  <!-- DPI -->
+ <div class="campo">
+  <label for="dpi">DPI</label>
+  <input id="dpi" type="text" formControlName="dpi" maxlength="13">
+  <div class="error" *ngIf="f['dpi'].touched && f['dpi'].invalid">
+    <span *ngIf="f['dpi'].errors?.['required']">El DPI es obligatorio.</span>
+    <span *ngIf="f['dpi'].errors?.['dpiInvalido']">El DPI debe tener exactamente 13 dígitos.</span>
+  </div>
+</div>
+
+  <!-- Correo -->
+  <div class="campo">
+    <label for="correo">Correo electrónico (opcional)</label>
+    <input id="correo" type="email" formControlName="correo">
+    <div class="error" *ngIf="f['correo'].touched && f['correo'].invalid">
+      <span *ngIf="f['correo'].errors?.['email']">Formato de correo inválido.</span>
+    </div>
+  </div>
+
+  <!-- Teléfono -->
+  <div class="campo">
+  <label for="telefono">Teléfono</label>
+  <input id="telefono" type="text" formControlName="telefono" maxlength="9">
+  <div class="error" *ngIf="f['telefono'].touched && f['telefono'].invalid">
+    <span *ngIf="f['telefono'].errors?.['required']">El teléfono es obligatorio.</span>
+    <span *ngIf="f['telefono'].errors?.['telefonoInvalido']">Formato inválido (8 dígitos, ej. 5551-0101).</span>
+  </div>
+</div>
+
+  <!-- Especialidad -->
+  <div class="campo">
+    <label for="especialidad">Especialidad</label>
+    <select id="especialidad" formControlName="especialidad">
+      <option value="" disabled selected>Seleccione una especialidad</option>
+      <option *ngFor="let esp of especialidades" [value]="esp">{{ esp }}</option>
+    </select>
+    <div class="error" *ngIf="f['especialidad'].touched && f['especialidad'].invalid">
+      <span *ngIf="f['especialidad'].errors?.['required']">Debe seleccionar una especialidad.</span>
+    </div>
+  </div>
+
+  <!-- Médico -->
+  <div class="campo">
+    <label for="medico">Médico</label>
+    <select id="medico" formControlName="medico">
+      <option value="" disabled selected>Seleccione un médico</option>
+      <option *ngFor="let med of medicos" [value]="med">{{ med }}</option>
+    </select>
+    <div class="error" *ngIf="f['medico'].touched && f['medico'].invalid">
+      <span *ngIf="f['medico'].errors?.['required']">Debe seleccionar un médico.</span>
+    </div>
+  </div>
+
+  <!-- Fecha -->
+  <div class="campo">
+  <label for="fecha">Fecha de la cita</label>
+  <input id="fecha" type="date" formControlName="fecha">
+  <div class="error" *ngIf="f['fecha'].touched && f['fecha'].invalid">
+    <span *ngIf="f['fecha'].errors?.['required']">La fecha es obligatoria.</span>
+    <span *ngIf="f['fecha'].errors?.['fechaInvalida']">La fecha no puede ser anterior a hoy.</span>
+  </div>
+</div>
+
+  <!-- Hora -->
+  <div class="campo">
+    <label for="hora">Hora</label>
+    <select id="hora" formControlName="hora">
+      <option value="" disabled selected>Seleccione una hora</option>
+      <option *ngFor="let h of horas" [value]="h">{{ h }}</option>
+    </select>
+    <div class="error" *ngIf="f['hora'].touched && f['hora'].invalid">
+      <span *ngIf="f['hora'].errors?.['required']">Debe seleccionar una hora.</span>
+    </div>
+  </div>
+
+  <!-- Motivo de consulta -->
+  <div class="campo">
+    <label for="motivoConsulta">Motivo de consulta</label>
+    <textarea id="motivoConsulta" formControlName="motivoConsulta" rows="4" maxlength="200"></textarea>
+    <div class="contador" [class.limite]="contadorMotivo > 200">
+      {{ contadorMotivo }}/200 caracteres
+    </div>
+    <div class="error" *ngIf="f['motivoConsulta'].touched && f['motivoConsulta'].invalid">
+      <span *ngIf="f['motivoConsulta'].errors?.['required']">El motivo es obligatorio.</span>
+      <span *ngIf="f['motivoConsulta'].errors?.['minlength']">Debe tener al menos 10 caracteres.</span>
+      <span *ngIf="f['motivoConsulta'].errors?.['maxlength']">No puede superar los 200 caracteres.</span>
+    </div>
+  </div>
+
+  <!-- Primera consulta -->
+  <div class="campo checkbox">
+    <label>
+      <input type="checkbox" formControlName="primeraConsulta">
+      Primera consulta
+    </label>
+  </div>
+  <div class="error" *ngIf="citaForm.errors?.['horarioChoque'] && citaForm.touched">
+  Ya existe una cita para ese médico en esa fecha y hora.
+</div>
+  <button type="submit" [disabled]="citaForm.invalid">Registrar cita</button>
+</form>
