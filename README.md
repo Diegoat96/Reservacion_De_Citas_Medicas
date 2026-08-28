@@ -1,59 +1,30 @@
-# ReservacionCitasMedicas
+# Sistema de Reservación de Citas Médicas
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.21.
+Aplicación web desarrollada con Angular y Formularios Reactivos para la gestión e integración de citas médicas en un entorno clínico.
 
-## Development server
+## Integrantes del Equipo y Roles
 
-To start a local development server, run:
+| Nombre | Rol | Responsabilidad Principal |
+| :--- | :--- | :--- |
+| **Diego** | Scrum Master / Coordinador | Configuración inicial, repositorio, rama develop, integraciones. |
+| **Mario** | Desarrollador de Formulario | Construcción del FormGroup, campos reactivos y mensajes de error. |
+| **Ángel** | Desarrollador de Listado | Renderizado de tabla de citas, acciones de edición/eliminación y filtros. |
+| **Brayan** | Desarrollador de Lógica y Validaciones | Expresiones regulares (DPI, Teléfono), validación de horarios y fechas. |
+| **Marlon** | QA / Diseño y Documentación | Estilos externos, ejecución de pruebas, recolección de evidencias y README. |
 
-```bash
-ng serve
-```
+## Estrategia de Ramas
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Se utilizó un flujo de trabajo basado en GitFlow simplificado:
+* `main`: Producción (únicamente recibe merge final desde `develop`).
+* `develop`: Integración continua de funcionalidades.
+* `feature/formulario`: Trabajo individual de Mario.
+* `feature/listado`: Trabajo individual de Ángel.
+* `feature/validaciones-logica`: Trabajo individual de Brayan.
+* `feature/estilos-pruebas`: Trabajo individual de Marlon.
 
-## Code scaffolding
+## Instrucciones de Ejecución
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Clonar el repositorio:
+   ```bash
+   git clone <URL_DEL_REPOSITO>
+   cd reservacion-citas-medicas
