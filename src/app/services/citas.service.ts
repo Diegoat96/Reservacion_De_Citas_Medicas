@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Cita } from '../models/cita';
+import { Cita, EstadoCita } from '../models/cita';
 
 @Injectable({
   providedIn: 'root',
@@ -74,4 +74,18 @@ export class CitasService {
       this.citas[indice] = { ...this.citas[indice], estado };
     }
   }
+
+  obtenerResumenTotales(): Record<EstadoCita, number> {
+    const resumen: Record<EstadoCita, number> = {
+    Programada: 0,
+    Atendida: 0,
+    Cancelada: 0,
+  };
+  this.citas.forEach(cita => {
+    resumen[cita.estado]++;
+  });
+  return resumen;
 }
+}
+
+  
