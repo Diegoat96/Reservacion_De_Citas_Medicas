@@ -21,9 +21,18 @@ export class ListadoCitasComponent implements OnInit {
   protected filtro: 'Todas' | EstadoCita = 'Todas';
   protected indiceEdicion: number | null = null;
   protected formularioEdicion!: FormGroup;
+  protected resumen: Record<EstadoCita, number> = {
+    Programada: 0,
+    Atendida: 0,
+    Cancelada: 0,
+  };
   protected readonly OPCIONES_ESTADO = OPCIONES_ESTADO;
   protected readonly OPCIONES_FILTRO = OPCIONES_FILTRO;
   protected readonly OPCIONES_SI_NO = OPCIONES_SI_NO;
+
+  protected get totalCitas(): number {
+    return this.resumen.Programada + this.resumen.Atendida + this.resumen.Cancelada;
+  }
 
   constructor(
     private readonly citasService: CitasService,
@@ -126,6 +135,11 @@ export class ListadoCitasComponent implements OnInit {
 
   private actualizarCitas(): void {
     this.citas = this.citasService.obtenerCitas();
+    this.actualizarResumen();
+  }
+
+  private actualizarResumen(): void {
+    this.resumen = this.citasService.obtenerResumenTotales();
   }
 
   private inicializarFormulario(): void {

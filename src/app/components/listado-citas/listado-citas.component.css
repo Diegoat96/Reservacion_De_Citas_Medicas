@@ -12,6 +12,80 @@
   margin-bottom: 16px;
 }
 
+.listado__resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.listado__tarjeta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 10px;
+  background-color: #fff;
+  border-left: 5px solid #94a3b8;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.listado__tarjeta--total {
+  border-left-color: #2563eb;
+}
+
+.listado__tarjeta--programada {
+  border-left-color: #1e40af;
+}
+
+.listado__tarjeta--atendida {
+  border-left-color: #16a34a;
+}
+
+.listado__tarjeta--cancelada {
+  border-left-color: #dc2626;
+}
+
+.listado__tarjeta-icono {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.listado__tarjeta--total .listado__tarjeta-icono {
+  color: #2563eb;
+}
+
+.listado__tarjeta--programada .listado__tarjeta-icono {
+  color: #1e40af;
+}
+
+.listado__tarjeta--atendida .listado__tarjeta-icono {
+  color: #16a34a;
+}
+
+.listado__tarjeta--cancelada .listado__tarjeta-icono {
+  color: #dc2626;
+}
+
+.listado__tarjeta-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.listado__tarjeta-numero {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #0f172a;
+}
+
+.listado__tarjeta-etiqueta {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
 .listado__titulo {
   margin: 0;
   color: #0f172a;
