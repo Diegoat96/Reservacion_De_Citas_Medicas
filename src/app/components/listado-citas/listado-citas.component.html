@@ -1,1 +1,220 @@
-<p>listado-citas works!</p>
+<section class="listado">
+  <header class="listado__header">
+    <h2 class="listado__titulo">Listado de citas</h2>
+
+    <div class="listado__filtros">
+      <label for="filtro-estado" class="listado__filtro-label">
+        Filtrar por estado:
+      </label>
+      <select
+        id="filtro-estado"
+        class="listado__filtro-select"
+        [value]="filtro"
+        (change)="cambiarFiltro($event)"
+      >
+        <option *ngFor="let opcion of OPCIONES_FILTRO" [value]="opcion">
+          {{ opcion }}
+        </option>
+      </select>
+    </div>
+  </header>
+
+  <p *ngIf="citas.length === 0" class="listado__vacio">
+    No hay citas registradas
+  </p>
+
+  <p *ngIf="citas.length > 0 && indicesFiltrados.length === 0" class="listado__vacio">
+    No hay citas con el estado "{{ filtro }}"
+  </p>
+
+  <div
+    *ngIf="citas.length > 0 && indicesFiltrados.length > 0"
+    class="listado__tabla-wrapper"
+  >
+    <table class="tabla">
+      <thead class="tabla__thead">
+        <tr class="tabla__fila">
+          <th class="tabla__encabezado">Paciente</th>
+          <th class="tabla__encabezado">Especialidad</th>
+          <th class="tabla__encabezado">Médico</th>
+          <th class="tabla__encabezado">Fecha</th>
+          <th class="tabla__encabezado">Hora</th>
+          <th class="tabla__encabezado">Estado</th>
+          <th class="tabla__encabezado">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="tabla__tbody">
+        <ng-container *ngFor="let indice of indicesFiltrados">
+          <tr class="tabla__fila">
+            <td class="tabla__dato">
+              <span class="tabla__paciente">
+                {{ citaEn(indice).nombrePaciente }}
+              </span>
+              <span class="tabla__dpi">{{ citaEn(indice).dpi }}</span>
+            </td>
+            <td class="tabla__dato">{{ citaEn(indice).especialidad }}</td>
+            <td class="tabla__dato">{{ citaEn(indice).medico }}</td>
+            <td class="tabla__dato">{{ citaEn(indice).fecha }}</td>
+            <td class="tabla__dato">{{ citaEn(indice).hora }}</td>
+            <td class="tabla__dato">
+              <span
+                class="estado"
+                [ngClass]="'estado--' + estadoCss(citaEn(indice).estado)"
+              >
+                {{ citaEn(indice).estado }}
+              </span>
+            </td>
+            <td class="tabla__dato tabla__acciones">
+              <button
+                type="button"
+                class="btn btn--editar"
+                (click)="iniciarEdicion(indice)"
+              >
+                Editar
+              </button>
+              <button
+                type="button"
+                class="btn btn--eliminar"
+                (click)="eliminarCita(indice)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="indiceEdicion === indice" class="edicion">
+            <td colspan="7">
+              <form
+                class="edicion__form"
+                [formGroup]="formularioEdicion"
+                (ngSubmit)="guardarEdicion()"
+              >
+                <div class="edicion__grid">
+                  <label class="campo">
+                    <span class="campo__label">Paciente</span>
+                    <input
+                      class="campo__input"
+                      type="text"
+                      formControlName="nombrePaciente"
+                    />
+                  </label>
+
+                  <label class="campo">
+                    <span class="campo__label">DPI</span>
+                    <input
+                      class="campo__input"
+                      type="text"
+                      formControlName="dpi"
+                    />
+                  </label>
+
+                  <label class="campo">
+                    <span class="campo__label">Correo</span>
+                    <input
+                      class="campo__input"
+                      type="email"
+                      formControlName="correo"
+                    />
+                  </label>
+
+                  <label class="campo">
+                    <span class="campo__label">Teléfono</span>
+                    <input
+                      class="campo__input"
+                      type="text"
+                      formControlName="telefono"
+                    />
+                  </label>
+
+                  <label class="campo">
+                    <span class="campo__label">Especialidad</span>
+                    <input
+                      class="campo__input"
+                      type="text"
+                      formControlName="especialidad"
+                    />
+                  </label>
+
+                  <label class="campo">
+                    <span class="campo__label">Médico</span>
+                    <input
+                      class="campo__input"
+                      type="text"
+                      formControlName="medico"
+                    />
+                  </label>
+
+                  <label class="campo">
+                    <span class="campo__label">Fecha</span>
+                    <input
+                      class="campo__input"
+                      type="date"
+                      formControlName="fecha"
+                    />
+                  </label>
+
+                  <label class="campo">
+                    <span class="campo__label">Hora</span>
+                    <input
+                      class="campo__input"
+                      type="time"
+                      formControlName="hora"
+                    />
+                  </label>
+
+                  <label class="campo">
+                    <span class="campo__label">Motivo de consulta</span>
+                    <textarea
+                      class="campo__input"
+                      rows="2"
+                      formControlName="motivoConsulta"
+                    ></textarea>
+                  </label>
+
+                  <label class="campo">
+                    <span class="campo__label">Primera consulta</span>
+                    <select
+                      class="campo__input"
+                      formControlName="primeraConsulta"
+                    >
+                      <option [ngValue]="true">Sí</option>
+                      <option [ngValue]="false">No</option>
+                    </select>
+                  </label>
+
+                  <label class="campo">
+                    <span class="campo__label">Estado</span>
+                    <select class="campo__input" formControlName="estado">
+                      <option
+                        *ngFor="let estado of OPCIONES_ESTADO"
+                        [value]="estado"
+                      >
+                        {{ estado }}
+                      </option>
+                    </select>
+                  </label>
+                </div>
+
+                <button
+                  type="button"
+                  class="btn btn--aceptar"
+                  (click)="guardarEdicion()"
+                  [disabled]="formularioEdicion.invalid"
+                >
+                  Guardar cambios
+                </button>
+                <button
+                  type="button"
+                  class="btn btn--secundario"
+                  (click)="cancelarEdicion()"
+                >
+                  Cancelar
+                </button>
+              </form>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</section>
